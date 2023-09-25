@@ -10,14 +10,21 @@ export class AppComponent {
   title = 'primeiro-angular-20232';
   alunos: Aluno[] = [];
   alunoTratamento: Aluno;
+  mensagemErro = '';
+  alunosPesquisa: Array<Aluno> = [];
 
   constructor() {
     this.alunoTratamento = new Aluno('', '', 0);
   }
 
   cadastrar(): void {
-    this.alunos.push(this.alunoTratamento);
-    this.alunoTratamento = new Aluno('', '', 0);
+    if (!this.ehMatriculaCadastrada(this.alunoTratamento.matricula)) {
+      this.alunos.push(this.alunoTratamento);
+      this.alunoTratamento = new Aluno('', '', 0);
+      this.mensagemErro = '';
+    } else {
+      this.mensagemErro = `Matrícula ${this.alunoTratamento.matricula} já cadastrada!`;
+    }
   }
 
   remover(alunoARemover: Aluno): void {
@@ -30,4 +37,19 @@ export class AppComponent {
 
   }
 
+  private ehMatriculaCadastrada(matricula: string): boolean {
+    const alunosRetornados = this.alunos.filter(aluno => aluno.matricula === matricula);
+    return alunosRetornados.length > 0;
+  }
+
+  pesquisar(pedacoNome: string) {
+    if (pedacoNome.length == 0) {
+      this.alunosPesquisa = [];
+    }
+    this.alunos.forEach(aluno => {
+      if (aluno.nome.startsWith(pedacoNome)) {
+        this.alunosPesquisa.push(aluno);
+      }
+    });
+  }
 }
