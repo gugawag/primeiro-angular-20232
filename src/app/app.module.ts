@@ -12,23 +12,21 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatBadgeModule} from "@angular/material/badge";
+import {AlunoModule} from "./aluno/aluno.module";
+import { MenuComponent } from './layout/layout/menu/menu.component';
+import {LayoutModule} from "./layout/layout/layout.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MatriculaPipe
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatBadgeModule
+    AlunoModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
