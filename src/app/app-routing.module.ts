@@ -14,7 +14,7 @@ const routes: Routes = [
     component: ManutencaoComponent
   },
   {
-    path: "edicao-aluno",
+    path: "edicao-aluno/:id",
     component: ManutencaoComponent
   },
   {

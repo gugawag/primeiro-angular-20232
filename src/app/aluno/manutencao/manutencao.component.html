@@ -1,6 +1,5 @@
 <h1>Cadastro de Alunos</h1>
 
-<label [matBadge]="alunos.length" matBadgeOverlap="false">Alunos</label>
 
 <br>
 <mat-form-field>
@@ -13,7 +12,7 @@
   Idade: <input matInput [(ngModel)]="alunoTratamento.idade" placeholder="Digite sua idade">
 </mat-form-field>
 
-<button mat-raised-button color="primary" (click)="cadastrar()">Cadastrar</button>
+<button mat-raised-button color="primary" (click)="cadastrar()">{{nomeBotao}}</button>
 <br>
 <div class="mensagem-erro">{{mensagemErro}}</div>
 <br>

@@ -4,6 +4,7 @@ import {MenuComponent} from "./menu/menu.component";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
+import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
 
 
 
@@ -13,7 +14,9 @@ import {RouterLink} from "@angular/router";
     CommonModule,
     MatMenuModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
+    FlexLayoutModule,
+    FlexModule
   ],
   exports: [MenuComponent]
 })

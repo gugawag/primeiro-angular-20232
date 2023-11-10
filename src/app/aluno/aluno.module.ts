@@ -6,6 +6,8 @@ import {FormsModule} from "@angular/forms";
 import {PipesModule} from "../shared/pipes/pipes.module";
 import {MaterialModule} from "../layout/material/material.module";
 import { CadastroListagemComponent } from './cadastro-listagem/cadastro-listagem.component';
+import {FlexModule} from "@angular/flex-layout";
+import {LayoutModule} from "../layout/layout/layout.module";
 
 @NgModule({
   declarations: [
@@ -13,12 +15,14 @@ import { CadastroListagemComponent } from './cadastro-listagem/cadastro-listagem
     ListagemComponent,
     CadastroListagemComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    PipesModule,
-    MaterialModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        PipesModule,
+        MaterialModule,
+        FlexModule,
+        LayoutModule
+    ],
   exports: [
     ManutencaoComponent,
     ListagemComponent,

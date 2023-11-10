@@ -15,6 +15,8 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {AlunoModule} from "./aluno/aluno.module";
 import { MenuComponent } from './layout/layout/menu/menu.component';
 import {LayoutModule} from "./layout/layout/layout.module";
+import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,10 @@ import {LayoutModule} from "./layout/layout/layout.module";
     FormsModule,
     BrowserAnimationsModule,
     AlunoModule,
-    LayoutModule
+    LayoutModule,
+    FlexModule,
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
