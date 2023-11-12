@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {ListagemComponent} from "./aluno/listagem/listagem.component";
 import {ManutencaoComponent} from "./aluno/manutencao/manutencao.component";
 import {CadastroListagemComponent} from "./aluno/cadastro-listagem/cadastro-listagem.component";
+import {ListagemTabelaComponent} from "./aluno/listagem-tabela/listagem-tabela.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: "cadastro-listagem-alunos",
     component: CadastroListagemComponent
+  },
+  {
+    path: "listagem-tabela",
+    component: ListagemTabelaComponent
   },
 
 ];

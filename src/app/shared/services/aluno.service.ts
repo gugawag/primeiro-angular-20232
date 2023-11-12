@@ -27,4 +27,12 @@ export class AlunoService {
   pesquisarPorId(id: string): Observable<Aluno> {
     return this.httpClient.get<Aluno>(`${this.ALUNO_API}/${id}`);
   }
+
+  atualizar(aluno: Aluno): Observable<Aluno> {
+    return this.httpClient.put<Aluno>(`${this.ALUNO_API}/${aluno.id}`, aluno);
+  }
+
+  pesquisarPorMatricula(matricula: string): Observable<Aluno[]> {
+    return this.httpClient.get<Aluno[]>(`${this.ALUNO_API}?matricula=${matricula}`);
+  }
 }

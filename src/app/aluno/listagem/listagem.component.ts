@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ALUNOS} from "../../shared/model/ALUNOS";
 import {Aluno} from "../../shared/model/aluno";
 import {AlunoService} from "../../shared/services/aluno.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-listagem',
@@ -11,8 +12,10 @@ import {AlunoService} from "../../shared/services/aluno.service";
 export class ListagemComponent implements OnInit {
   alunos: Aluno[] = [];
   alunosPesquisa: Array<Aluno> = [];
+  matriculaPesquisada: string = '';
+  alunosPesquisados: Aluno[] = [];
 
-  constructor(private alunoService: AlunoService) {
+  constructor(private alunoService: AlunoService, private roteador: Router) {
   }
 
   ngOnInit() {
@@ -40,15 +43,16 @@ export class ListagemComponent implements OnInit {
 
   }
 
-  pesquisar(pedacoNome: string) {
-    if (pedacoNome.length == 0) {
-      this.alunosPesquisa = [];
-    }
-    this.alunos.forEach(aluno => {
-      if (aluno.nome.startsWith(pedacoNome)) {
-        this.alunosPesquisa.push(aluno);
-      }
+  pesquisar() {
+    this.alunoService.pesquisarPorMatricula(this.matriculaPesquisada).subscribe(alunos => {
+      this.alunosPesquisados = alunos;
     });
+  }
+
+  editar(id: string): void {
+    console.log('id');
+    console.log(id);
+    this.roteador.navigate(['edicao-aluno', id]);
   }
 
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Aluno} from "../../shared/model/aluno";
 import {ALUNOS} from "../../shared/model/ALUNOS";
 import {AlunoService} from "../../shared/services/aluno.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-manutencao',
@@ -18,7 +18,7 @@ export class ManutencaoComponent {
   estahCadastrando = true;
   nomeBotao = this.NOME_BOTAO_CADASTRAR;
 
-  constructor(private alunoService: AlunoService, private rotaAtivada: ActivatedRoute) {
+  constructor(private alunoService: AlunoService, private rotaAtivada: ActivatedRoute, private roteador: Router) {
     const idEdicao = this.rotaAtivada.snapshot.params['id'];
     if (idEdicao) {
       this.estahCadastrando = false;
@@ -30,12 +30,18 @@ export class ManutencaoComponent {
     this.nomeBotao = this.estahCadastrando ? this.NOME_BOTAO_CADASTRAR : this.NOME_BOTAO_ATUALIZAR;
   }
 
-  cadastrar(): void {
-    this.alunoService.cadastrar(this.alunoTratamento).subscribe(
-      alunoCadastrado => {
-        console.log(alunoCadastrado);
-      }
-    );
+  cadastrarOuAtualizar(): void {
+    if (this.estahCadastrando) {
+      this.alunoService.cadastrar(this.alunoTratamento).subscribe(
+        alunoCadastrado => {
+          this.roteador.navigate(['/listagem-alunos']);
+        }
+      );
+    } else {
+      this.alunoService.atualizar(this.alunoTratamento).subscribe(aluno => {
+        this.roteador.navigate(['/listagem-alunos']);
+      });
+    }
   }
 
   // private ehMatriculaCadastrada(matricula: string): boolean {

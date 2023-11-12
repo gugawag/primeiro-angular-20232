@@ -8,12 +8,16 @@ import {MaterialModule} from "../layout/material/material.module";
 import { CadastroListagemComponent } from './cadastro-listagem/cadastro-listagem.component';
 import {FlexModule} from "@angular/flex-layout";
 import {LayoutModule} from "../layout/layout/layout.module";
+import {RouterModule} from "@angular/router";
+import { ListagemTabelaComponent } from './listagem-tabela/listagem-tabela.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
     ManutencaoComponent,
     ListagemComponent,
-    CadastroListagemComponent
+    CadastroListagemComponent,
+    ListagemTabelaComponent
   ],
     imports: [
         CommonModule,
@@ -21,12 +25,15 @@ import {LayoutModule} from "../layout/layout/layout.module";
         PipesModule,
         MaterialModule,
         FlexModule,
-        LayoutModule
+        LayoutModule,
+        RouterModule,
+        MatTableModule
     ],
   exports: [
     ManutencaoComponent,
     ListagemComponent,
-    CadastroListagemComponent
+    CadastroListagemComponent,
+    ListagemTabelaComponent
   ]
 })
 export class AlunoModule { }

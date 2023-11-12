@@ -15,7 +15,7 @@
     <button mat-fab color="primary" (click)="remover(aluno)">
       <mat-icon> delete</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="editar(aluno.id)">
       <mat-icon>edit</mat-icon>
     </button>
   </mat-card-actions>
@@ -25,10 +25,11 @@
 
 
 <br>
-Pesquisar: <input (keyup)="pesquisar(inputPesquisa.value)" #inputPesquisa>
+<input [(ngModel)]="matriculaPesquisada">
+<button mat-button (click)="pesquisar()">Pesquisar</button>
 <ul>
-  <li *ngFor="let aluno of alunosPesquisa">
-    {{aluno.matricula | matricula}}-{{aluno.nome | titlecase}}
+  <li *ngFor="let alunoPesquisado of alunosPesquisados">
+    {{alunoPesquisado.matricula | matricula}}-{{alunoPesquisado.nome | titlecase}}
   </li>
 </ul>
 
