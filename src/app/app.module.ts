@@ -17,6 +17,12 @@ import { MenuComponent } from './layout/layout/menu/menu.component';
 import {LayoutModule} from "./layout/layout/layout.module";
 import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
 import {HttpClientModule} from "@angular/common/http";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MensagemSnackService} from "./shared/services/mensagem-snack.service";
+import {IMensagem} from "./shared/model/imensagem";
+import {MensagemService} from "./shared/services/mensagem.service";
+import {MensagemSweetService} from "./shared/services/mensagem-sweet.service";
+import {InterceptorModule} from "./shared/interceptor/interceptor.module";
 
 @NgModule({
   declarations: [
@@ -31,9 +37,16 @@ import {HttpClientModule} from "@angular/common/http";
     LayoutModule,
     FlexModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule,
+    InterceptorModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: IMensagem,
+      useClass: MensagemSweetService
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

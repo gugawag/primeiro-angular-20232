@@ -3,6 +3,9 @@ import {Aluno} from "../../shared/model/aluno";
 import {ALUNOS} from "../../shared/model/ALUNOS";
 import {AlunoService} from "../../shared/services/aluno.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MensagemService} from "../../shared/services/mensagem.service";
+import {MensagemSnackService} from "../../shared/services/mensagem-snack.service";
+import {IMensagem} from "../../shared/model/imensagem";
 
 @Component({
   selector: 'app-manutencao',
@@ -18,7 +21,8 @@ export class ManutencaoComponent {
   estahCadastrando = true;
   nomeBotao = this.NOME_BOTAO_CADASTRAR;
 
-  constructor(private alunoService: AlunoService, private rotaAtivada: ActivatedRoute, private roteador: Router) {
+  constructor(private alunoService: AlunoService, private rotaAtivada: ActivatedRoute, private roteador: Router,
+              private mensagemService: IMensagem) {
     const idEdicao = this.rotaAtivada.snapshot.params['id'];
     if (idEdicao) {
       this.estahCadastrando = false;
@@ -32,13 +36,22 @@ export class ManutencaoComponent {
 
   cadastrarOuAtualizar(): void {
     if (this.estahCadastrando) {
-      this.alunoService.cadastrar(this.alunoTratamento).subscribe(
-        alunoCadastrado => {
-          this.roteador.navigate(['/listagem-alunos']);
-        }
-      );
+          this.alunoService.pesquisarPorMatricula(this.alunoTratamento.matricula).subscribe(
+            alunoPesquisado => {
+              if (alunoPesquisado && alunoPesquisado.length > 0) {
+                this.mensagemService.erro(`Já há aluno com a matrícula ${this.alunoTratamento.matricula}!`);
+              } else {
+                this.alunoService.cadastrar(this.alunoTratamento).subscribe(
+                  alunoCadastrado => {
+                    this.mensagemService.sucesso('Aluno cadastrado!');
+                    this.roteador.navigate(['/listagem-alunos']);
+                  });
+              }
+            }
+          );
     } else {
       this.alunoService.atualizar(this.alunoTratamento).subscribe(aluno => {
+        this.mensagemService.sucesso('Aluno atualizado!');
         this.roteador.navigate(['/listagem-alunos']);
       });
     }
