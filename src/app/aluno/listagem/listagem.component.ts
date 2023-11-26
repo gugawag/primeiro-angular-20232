@@ -3,6 +3,7 @@ import {ALUNOS} from "../../shared/model/ALUNOS";
 import {Aluno} from "../../shared/model/aluno";
 import {AlunoService} from "../../shared/services/aluno.service";
 import {Router} from "@angular/router";
+import {AlunoFirestoreService} from "../../shared/services/aluno-firestore.service";
 
 @Component({
   selector: 'app-listagem',
@@ -15,7 +16,7 @@ export class ListagemComponent implements OnInit {
   matriculaPesquisada: string = '';
   alunosPesquisados: Aluno[] = [];
 
-  constructor(private alunoService: AlunoService, private roteador: Router) {
+  constructor(private alunoService: AlunoFirestoreService, private roteador: Router) {
   }
 
   ngOnInit() {
@@ -49,7 +50,7 @@ export class ListagemComponent implements OnInit {
     });
   }
 
-  editar(id: string): void {
+  editar(id?: string): void {
     console.log('id');
     console.log(id);
     this.roteador.navigate(['edicao-aluno', id]);

@@ -30,25 +30,27 @@ export class ManutencaoComponent {
         this.alunoTratamento = alunoRetornado;
       });
     }
-    this.alunoTratamento = new Aluno('','', '', 0);
+    this.alunoTratamento = new Aluno('');
     this.nomeBotao = this.estahCadastrando ? this.NOME_BOTAO_CADASTRAR : this.NOME_BOTAO_ATUALIZAR;
   }
 
   cadastrarOuAtualizar(): void {
     if (this.estahCadastrando) {
-          this.alunoService.pesquisarPorMatricula(this.alunoTratamento.matricula).subscribe(
-            alunoPesquisado => {
-              if (alunoPesquisado && alunoPesquisado.length > 0) {
-                this.mensagemService.erro(`Já há aluno com a matrícula ${this.alunoTratamento.matricula}!`);
-              } else {
-                this.alunoService.cadastrar(this.alunoTratamento).subscribe(
-                  alunoCadastrado => {
-                    this.mensagemService.sucesso('Aluno cadastrado!');
-                    this.roteador.navigate(['/listagem-alunos']);
-                  });
-              }
+      if (this.alunoTratamento.matricula) {
+        this.alunoService.pesquisarPorMatricula(this.alunoTratamento.matricula).subscribe(
+          alunoPesquisado => {
+            if (alunoPesquisado && alunoPesquisado.length > 0) {
+              this.mensagemService.erro(`Já há aluno com a matrícula ${this.alunoTratamento.matricula}!`);
+            } else {
+              this.alunoService.cadastrar(this.alunoTratamento).subscribe(
+                alunoCadastrado => {
+                  this.mensagemService.sucesso('Aluno cadastrado!');
+                  this.roteador.navigate(['/listagem-alunos']);
+                });
             }
-          );
+          }
+        );
+      }
     } else {
       this.alunoService.atualizar(this.alunoTratamento).subscribe(aluno => {
         this.mensagemService.sucesso('Aluno atualizado!');

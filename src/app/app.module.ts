@@ -23,6 +23,7 @@ import {IMensagem} from "./shared/model/imensagem";
 import {MensagemService} from "./shared/services/mensagem.service";
 import {MensagemSweetService} from "./shared/services/mensagem-sweet.service";
 import {InterceptorModule} from "./shared/interceptor/interceptor.module";
+import {FirestoreAcademicoModule} from "./shared/firestore-academico/firestore-academico.module";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {InterceptorModule} from "./shared/interceptor/interceptor.module";
     FlexLayoutModule,
     HttpClientModule,
     MatSnackBarModule,
-    InterceptorModule
+    InterceptorModule,
+    FirestoreAcademicoModule
   ],
   providers: [
     {
